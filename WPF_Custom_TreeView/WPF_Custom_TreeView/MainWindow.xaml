@@ -3,10 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF_Custom_TreeView"
+        xmlns:local="clr-namespace:WPF_Custom_TreeView" 
+        xmlns:views="clr-namespace:WPF_Custom_TreeView.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="CustomTreeViewDemo" Height="400" Width="400">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
 
+        <views:CustomControlView DataContext="{Binding CustomControlViewModel}"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Add Item" Width="200"/>
+            <Button Content="Remove Item" Width="200"/>
+        </StackPanel>
     </Grid>
 </Window>
