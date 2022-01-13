@@ -5,19 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Custom_TreeView" 
         xmlns:views="clr-namespace:WPF_Custom_TreeView.Views"
+        xmlns:itr="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="CustomTreeViewDemo" Height="400" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
 
         <views:CustomControlView DataContext="{Binding CustomControlViewModel}"/>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Add Item" Width="200"/>
-            <Button Content="Remove Item" Width="200"/>
-        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="First Name" Width="60"/>
+                    <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Width="140"/>
+            </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Last Name" Width="60"/>
+                    <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Width="140"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock Text="Property" Width="60"/>
+                    <TextBox Text="{Binding PersonProperty, UpdateSourceTrigger=PropertyChanged}" Width="140"/>
+                </StackPanel>
+                
+                <Button Grid.Row="3" Content="Add Item" Width="200">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <itr:CallMethodAction TargetObject="{Binding}" MethodName="AddPerson"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                
+            </Grid>
+            <Button Grid.Column="1"  Content="Remove Selected Item" Width="200">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <itr:CallMethodAction TargetObject="{Binding}" MethodName="RemovePerson"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

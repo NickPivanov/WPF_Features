@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
+using WPF_Custom_TreeView.Models;
+using WPF_Custom_TreeView.Services;
 using WPF_Custom_TreeView.ViewModels;
 
 namespace WPF_Custom_TreeView
@@ -23,6 +25,7 @@ namespace WPF_Custom_TreeView
                     });
 
                     //add here other services
+                    services.AddSingleton<IDataService<Person>, DataService>();
                 })
                 .Build();
          }
