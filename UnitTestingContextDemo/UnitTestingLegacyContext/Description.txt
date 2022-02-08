@@ -1,0 +1,4 @@
+﻿Imagine that you have an old legacy code and you have to add some modification in it.
+Also you decided to do some tests. But the problem is that you're dealing with an old
+version of EntityFramework that doesn't support InMemory (in this particular example
+I will just simulate context).
