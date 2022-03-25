@@ -1,0 +1,50 @@
+﻿<Window x:Class="TextboxPlaceholderDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextboxPlaceholderDemo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="200" Width="200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="txbDemoText"
+                   Grid.Row="1"
+                   Height="30" 
+                   Background="#FFB1EAA9"
+                   Margin="2">
+        </TextBox>
+        <TextBlock Text="Type text here..."
+                   Grid.Row="1"
+                   Foreground="DarkGray"
+                   FontSize="14"
+                   IsHitTestVisible="False"
+                   Margin="2">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsFocused, ElementName=txbDemoText}" Value="false" />
+                                <Condition Binding="{Binding Text, ElementName=txbDemoText}" Value="" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <Button Grid.Row="2" 
+                Height="30" 
+                Width="100"
+                Content="LostFocus"/>
+    </Grid>
+</Window>
