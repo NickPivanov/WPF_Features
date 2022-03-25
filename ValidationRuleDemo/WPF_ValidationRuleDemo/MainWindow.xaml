@@ -1,0 +1,45 @@
+﻿<Window x:Class="WPF_ValidationRuleDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_ValidationRuleDemo"
+        xmlns:validation="clr-namespace:WPF_ValidationRuleDemo.ValidationRules"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="200" Width="300" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <validation:EmailValidationRule x:Key="EmailValidation"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    Margin="0 5 0 0">
+            <RadioButton Content="mail" IsChecked="{Binding IsEmail, UpdateSourceTrigger=PropertyChanged}"/>
+            <RadioButton Content="phone" IsChecked="{Binding IsPhone, UpdateSourceTrigger=PropertyChanged}" Margin="15 0 0 0"/>
+        </StackPanel>
+        <TextBox Name="txbTest" Grid.Row="1"
+                 Width="180"
+                 Height="30"
+                 Margin="0 5 0 0" 
+                 GotFocus="txbTest_GotFocus">
+            <TextBox.Text>
+                <Binding Path="AddressValue" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <validation:EmailValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Grid x:Name="grdContacts" Grid.Row="2" Width="{Binding ElementName=txbTest, Path=Width}"/>
+        <Label Grid.Row="2" Content="Some label"/>
+    </Grid>
+</Window>
